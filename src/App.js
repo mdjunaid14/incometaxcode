@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import TaxForm from "./components/TaxForm";
 import Disclaimer from "./components/Disclaimer";
 import SaveForm from "./components/SaveForm";
+import Thank from "./components/Thank";
 
 export default class App extends Component {
   render() {
@@ -19,11 +20,12 @@ export default class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={TaxForm}></Route>
-                  <Route exact path="/savetaxes" component={SaveForm}></Route>
+                  <Route exact path="/savetaxes/" component={SaveForm}></Route>
+                  <Route exact path="/thankyou/" component={Thank}></Route>
                 </Switch>
               </div>
             </div>
-            <Disclaimer />
+            <Disclaimer className="disclaimer" />
           </React.Fragment>
         </Router>
       </Provider>
