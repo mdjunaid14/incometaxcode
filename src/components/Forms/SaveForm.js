@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import Form from "./Form";
-import { updateState } from "../actions/stateActions";
+import { updateState } from "../../actions/stateActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-// import { calc } from "../math/calculation";
+// import { calc } from "../../math/calculation";
 
 class SaveForm extends Component {
   state = {
-    // values: [
     age: 0,
     basic_salary: 0,
     epf: 0,
@@ -18,30 +17,26 @@ class SaveForm extends Component {
     life_ins: 0,
     ppf: 0,
     tuition_fee: 0
-    // ]
-  };
-
-  onChange = e => {
-    // console.log(typeof parseInt(e.target.value));
-    this.setState({ [e.target.name]: parseInt(e.target.value) });
-  };
-
-  // Calculation
-  onCalculus = () => {
-    const { values } = this.props.values;
-    console.log(values);
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-
-    // update values in the initialState (Redux)
-    const value = this.state;
-    // console.log(value);
-    this.props.updateState(value);
   };
 
   render() {
+    const onSubmit = e => {
+      e.preventDefault();
+
+      // update values in the initialState (Redux)
+      const value = this.state;
+      // console.log(value);
+      this.props.updateState(value);
+    };
+
+    const onChange = e => {
+      // console.log(typeof parseInt(e.target.value));
+      this.setState({ [e.target.name]: parseInt(e.target.value) });
+    };
+
+    const { values } = this.props.values;
+    console.log(values);
+
     var items = [
       {
         heading: "Basic Info",
@@ -88,8 +83,8 @@ class SaveForm extends Component {
             <div>(All amounts are in Rupees per annum basis)</div>
             <hr />
           </div>
-          <form onSubmit={this.onSubmit}>
-            <Form key={items.keys} items={items} onChange={this.onChange} />
+          <form onSubmit={onSubmit}>
+            <Form items={items} onChange={onChange} />
             <button className="btn btn-outline-success" type="submit">
               Submit
             </button>

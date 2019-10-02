@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { calc } from "../math/calculation";
+import { calc } from "../../math/calculation";
 
 export default class TaxForm extends Component {
   state = {
-    values: [{ salary: 0 }, { amount: 0 }]
+    values: [{ salary: 0 }, { amount: 0 }, { status: false }]
   };
 
-  onChange = e => {
-    // console.log(e.target.value);
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    console.log(this.state.salary);
+  calulation = () => {
     const sal = this.state.salary;
     const amt = this.state.amount;
     const result = calc(sal, amt);
     this.setState({ amount: result });
-    console.log(result);
+  };
+
+  onChange = e => {
+    // console.log(e.target.value);
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      this.calulation();
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
   };
 
   render() {
@@ -45,9 +48,9 @@ export default class TaxForm extends Component {
                 onChange={this.onChange}
               />
             </div>
-            <button className="btn btn-outline-primary" type="submit">
+            {/* <button className="btn btn-outline-primary" type="submit">
               Submit
-            </button>
+            </button> */}
           </form>
           <br />
           <div className="h3">
