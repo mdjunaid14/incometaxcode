@@ -19,13 +19,15 @@ export default class TaxForm extends Component {
     const amt = this.state.amount;
     const result = calc(sal, amt);
     this.setState({ amount: result });
+    console.log(result);
   };
 
   render() {
     return (
       <>
-        <div className="container mb-10 dimensions">
+        <div className="container mb-10 dimensions border-card">
           <div className="h1">Tax Form</div>
+          <div>(All amounts are in Rupees per annum basis)</div>
           <hr />
           <br />
           <form onSubmit={this.onSubmit}>

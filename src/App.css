@@ -5,3 +5,11 @@
 .dimensions {
   height: 550px;
 }
+
+.border-card {
+  border: 0.5px gray solid;
+  border-radius: 10px;
+  box-shadow: 0.2px 0.2px 0.2px;
+  padding: 50px;
+  margin: 10px 0px;
+}

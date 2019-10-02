@@ -3,6 +3,7 @@ import Form from "./Form";
 import { updateState } from "../actions/stateActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+// import { calc } from "../math/calculation";
 
 class SaveForm extends Component {
   state = {
@@ -25,11 +26,19 @@ class SaveForm extends Component {
     this.setState({ [e.target.name]: parseInt(e.target.value) });
   };
 
+  // Calculation
+  onCalculus = () => {
+    const { values } = this.props.values;
+    console.log(values);
+  };
+
   onSubmit = e => {
     e.preventDefault();
-    const values = this.state;
-    console.log(values);
-    this.props.updateState(values);
+
+    // update values in the initialState (Redux)
+    const value = this.state;
+    // console.log(value);
+    this.props.updateState(value);
   };
 
   render() {
@@ -73,14 +82,14 @@ class SaveForm extends Component {
 
     return (
       <>
-        <div className="container mb-10">
+        <div className="container mb-10 border-card">
           <div>
             <div className="h1">Tax Save Form</div>
             <div>(All amounts are in Rupees per annum basis)</div>
             <hr />
           </div>
           <form onSubmit={this.onSubmit}>
-            <Form items={items} onChange={this.onChange} />
+            <Form key={items.keys} items={items} onChange={this.onChange} />
             <button className="btn btn-outline-success" type="submit">
               Submit
             </button>
