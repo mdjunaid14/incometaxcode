@@ -17,16 +17,16 @@ export default class App extends Component {
         <Router>
           <React.Fragment>
             <Navbar />
-            <div className="App">
-              <div className="container">
-                <Switch>
-                  <Route exact path="/" component={TaxForm}></Route>
-                  <Route exact path="/savetaxes/" component={SaveForm}></Route>
-                  <Route exact path="/thankyou/" component={Thank}></Route>
-                  <Route exact path="/result/" component={Result}></Route>
-                </Switch>
-              </div>
+            {/* <div className="App"> */}
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={TaxForm}></Route>
+                <Route exact path="/savetaxes/" component={SaveForm}></Route>
+                <Route exact path="/thankyou/" component={Thank}></Route>
+                <Route exact path="/result/" component={Result}></Route>
+              </Switch>
             </div>
+            {/* </div> */}
             <Disclaimer className="disclaimer" />
           </React.Fragment>
         </Router>

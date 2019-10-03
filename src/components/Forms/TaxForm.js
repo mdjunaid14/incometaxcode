@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { calc } from "../../math/calculation";
+import { calculator } from "../../math/calculation";
 
 export default class TaxForm extends Component {
   state = {
-    values: [{ salary: 0 }, { amount: 0 }, { status: false }]
+    salary: 0,
+    amount: 0,
+    status: false
   };
 
   calulation = () => {
     const sal = this.state.salary;
     const amt = this.state.amount;
-    const result = calc(sal, amt);
+    const result = calculator(sal, amt);
     this.setState({ amount: result });
   };
 
@@ -27,7 +29,7 @@ export default class TaxForm extends Component {
 
   render() {
     return (
-      <>
+      <div className="App">
         <div className="container mb-10 dimensions border-card">
           <div className="h1">Tax Form</div>
           <div>(All amounts are in Rupees per annum basis)</div>
@@ -53,9 +55,11 @@ export default class TaxForm extends Component {
             </button> */}
           </form>
           <br />
-          <div className="h3">
-            Your have to pay {this.state.amount} in taxes{" "}
-          </div>
+          {this.state.salary !== 0 && (
+            <div className="h3">
+              Your have to pay {this.state.amount} in taxes{" "}
+            </div>
+          )}
           <br />
           <div>
             <div>Do you want to save taxes?</div>
@@ -68,7 +72,7 @@ export default class TaxForm extends Component {
           </div>
           <br />
         </div>
-      </>
+      </div>
     );
   }
 }

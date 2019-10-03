@@ -5,13 +5,16 @@ let initialState = {
     age: 0,
     basic_salary: 0,
     epf: 0,
+    nps: 0,
     health_ins: 0,
     home_interest: 0,
     home_premium: 0,
     hra: 0,
     life_ins: 0,
     ppf: 0,
-    tuition_fee: 0
+    tuition_fee: 0,
+    girl_child: 0,
+    house_rent: 0
   }
 };
 
