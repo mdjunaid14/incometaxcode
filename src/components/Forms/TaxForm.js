@@ -12,7 +12,7 @@ export default class TaxForm extends Component {
   calulation = () => {
     const sal = this.state.salary;
     const amt = this.state.amount;
-    const result = calculator(sal, amt);
+    const result = calculator(sal, amt, 0);
     this.setState({ amount: result });
   };
 

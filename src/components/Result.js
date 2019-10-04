@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { calc } from "../math/calculation";
+import PieCharts from "./Layouts/PieCharts";
 
 class Result extends Component {
   state = {
@@ -28,7 +29,15 @@ class Result extends Component {
     this.setState({ values: this.props.values.values });
 
     // console.log(age, basic_salary, health_ins, nps);
-    const amount = calc(
+    const [
+      sal_calc,
+      amount_calc,
+      fixed_deposit_calc,
+      ssy_calc,
+      nps_calc,
+      deductions_calc,
+      std_calc
+    ] = calc(
       basic_salary,
       amt,
       age,
@@ -44,8 +53,16 @@ class Result extends Component {
       home_interest,
       home_premium
     );
-    console.log(amount);
-    this.setState({ amt: amount, status: true });
+    console.log(sal_calc, amount_calc);
+    this.setState({
+      amt: amount_calc,
+      status: true,
+      fixed_deposit_calc: fixed_deposit_calc,
+      ssy_calc: ssy_calc,
+      nps_calc: nps_calc,
+      deductions_calc: deductions_calc,
+      std_calc: std_calc
+    });
   };
 
   render() {
@@ -73,9 +90,13 @@ class Result extends Component {
               <div className="h1">Tax Report</div>
               <div>(All amounts are in Rupees per annum basis)</div>
               <hr></hr>
+              <br />
               <div className="h2">
                 The total tax to be paid is {this.state.amt}
               </div>
+              <br />
+              <PieCharts props={this.state} />
+              <br />
             </div>
             <br />
             <div className="h4">
@@ -83,31 +104,38 @@ class Result extends Component {
             </div>
             <ol>
               <li>
-                <div className="h6">Standard deduction of 50000</div>
+                <div className="h6">
+                  Standard deduction of {this.state.std_calc}
+                </div>
+              </li>
+              <li>
+                <div className="h6">
+                  National Pension Scheme of {this.state.nps_calc}
+                </div>
               </li>
               <li>
                 <div className="h6">
                   Total Deductions under 80C (Home Loan Premium, Life Insurance,
                   EPF, PPF, Tuition Fee, NPS, NSC, Senior Citizen Savings
-                  Scheme, Sukanya Samriddhi Yojana, Fixed Deposits, ELSS) is
-                  150000
+                  Scheme, Sukanya Samriddhi Yojana, Fixed Deposits, ELSS) is{" "}
+                  {this.state.deductions_calc}
                   <ul>
                     <li>Home Loan Premium: {this.state.values.home_premium}</li>
                     <li>Life Insurance: {this.state.values.life_ins}</li>
                     <li>EPF: {this.state.values.epf}</li>
                     <li>PPF: {this.state.values.ppf}</li>
                     <li>Tuition Fees: {this.state.values.tuition_fee}</li>
+                    <li>Fixed Deposits: {this.state.fixed_deposit_calc}</li>
                     <li>
-                      Fixed Deposits:{" "}
-                      {150000 -
-                        this.state.values.home_premium -
-                        this.state.values.life_ins -
-                        this.state.values.epf -
-                        this.state.values.ppf -
-                        this.state.values.tuition_fee}
+                      Sukanya Samriddhi Yojana (if having girl child below the
+                      age of 10 years): {this.state.ssy_calc}
                     </li>
-                    <li>Sukanya Samriddhi Yojana: 10000</li>
                   </ul>
+                  <br />
+                  <div className="p">
+                    "Note: If the maximum tax exemption in this clause is capped
+                    to 150000"{" "}
+                  </div>
                 </div>
               </li>
               <li>
@@ -142,8 +170,18 @@ class Result extends Component {
               <li>
                 {" "}
                 <div className="h6">
-                  You can save 50000 in National Pension Scheme (exepted from
+                  You can save 50000 in National Pension Scheme (exempted from
                   taxation under 80CCD)
+                </div>
+              </li>{" "}
+              <li>
+                {" "}
+                <div className="h6">
+                  If you are a senior citizen, then you can avail the Senior
+                  Citizens Savings Scheme by the Govt. of India. You can get a
+                  tax exemption of upto 1.5L and much higher interest rates than
+                  fixed deposits.(Note, the interest obtained in this scheme is
+                  taxable )
                 </div>
               </li>
               <li>
@@ -153,7 +191,6 @@ class Result extends Component {
                   upto interest of 10000 p.a){" "}
                 </div>
               </li>
-
               <li>
                 {" "}
                 <div className="h6">

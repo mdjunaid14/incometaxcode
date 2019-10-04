@@ -1,3 +1,4 @@
+// Tax Calulator for Tax SaveForm
 export const calc = (
   basic_salary,
   amt,
@@ -15,8 +16,6 @@ export const calc = (
   home_premium
 ) => {
   var sal = basic_salary;
-  //   console.log(typeof sal);
-  // console.log(sal);
   const std = 50000; //std deduction
   nps = 50000; //National Pension System
   var ssy = 0; //initialisation of Sukanya Samriddhi Yojana Bank Accounts Balance
@@ -69,61 +68,19 @@ export const calc = (
   }
 
   const gen_deductions = health_ins + home_interest + hra;
-
-  // if (deductions > 150000) {
-  //   deductions = 150000;
-  // }
   const final_deductions =
     std + nps + ssy + fixed_deposit + deductions + gen_deductions;
   console.log(std, nps, fixed_deposit, deductions, gen_deductions, deductible);
 
+  amt = calculator(sal, amt, final_deductions);
   sal -= final_deductions;
-  console.log(sal);
-  if (sal > 0) {
-    if (sal > 250000) {
-      if (sal > 500000) {
-        if (sal > 1000000) {
-          sal -= 1000000;
-          amt = 112500 + sal * 0.3;
-        } else if (sal <= 1000000) {
-          sal -= 500000;
-          amt = 12500 + sal * 0.2;
-        } else {
-          console.log("error");
-        }
-      } else if (sal <= 500000) {
-        sal -= 250000;
-        amt = sal * 0.05;
-      } else {
-        console.log("error");
-      }
-    } else if (sal <= 250000) {
-      amt = 0;
-    } else {
-      console.log("error");
-    }
-    return amt;
-  } else if (sal <= 0) {
-    return (amt = 0);
-  } else {
-    console.log("error");
-    return (amt = 0);
-  }
+  console.log(amt, final_deductions, sal);
+  // return amt;
+  return [sal, amt, fixed_deposit, ssy, nps, deductions, std];
 };
 
-// age: 0,
-//     basic_salary: 0,
-//     epf: 0,
-//     health_ins: 0,
-//     home_interest: 0,
-//     home_premium: 0,
-//     hra: 0,
-//     life_ins: 0,
-//     ppf: 0,
-//     tuition_fee: 0
-
-export const calculator = (sal, amt) => {
-  var final_deductions = 0;
+// Calculator for general TaxForm
+export const calculator = (sal, amt, final_deductions) => {
   sal -= final_deductions;
   if (sal > 0) {
     if (sal > 250000) {
@@ -150,9 +107,10 @@ export const calculator = (sal, amt) => {
     }
     return amt;
   } else if (sal === 0) {
-    return (amt = 0);
+    amt = 0;
   } else {
     console.log("error");
-    return (amt = 0);
+    amt = 0;
   }
+  return amt;
 };
