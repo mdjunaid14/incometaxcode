@@ -2,8 +2,17 @@
   text-align: center;
 }
 
+body {
+  color: #333333;
+}
+
 .dimensions {
   height: 550px;
+}
+
+.navbar-changes {
+  color: white;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1);
 }
 
 .border-card {
@@ -11,7 +20,7 @@
   border-radius: 10px;
   box-shadow: 0.2px 0.2px 0.2px;
   padding: 50px;
-  margin: 10px 0px;
+  margin: 80px 0px 10px 0px;
 }
 
 .listStyle {

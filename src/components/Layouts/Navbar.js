@@ -4,11 +4,11 @@ export default class Navbar extends Component {
   render() {
     return (
       <>
-        <div className="navbar navbar-lg bg-light mb-3">
+        <nav className="navbar navbar-lg bg-dark mb-3 fixed-top navbar-changes">
           <div className="navbar-brand mb-0 h1 mx-auto">
             Comprehensive Income Tax Calculator
           </div>
-        </div>
+        </nav>
       </>
     );
   }

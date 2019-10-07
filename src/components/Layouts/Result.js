@@ -103,6 +103,10 @@ class Result extends Component {
               <div className="h2">
                 The total tax to be paid is {this.state.amt}
               </div>
+              <div className="h3">
+                Hence, the salary amount after tax and deductions is{" "}
+                {this.state.sal_aftertax < 0 ? 0 : this.state.sal_aftertax}
+              </div>
               <br />
               <PieCharts props={this.state} />
               <br />
