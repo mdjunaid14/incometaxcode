@@ -20,7 +20,7 @@ class SaveForm extends Component {
     tuition_fee: 0,
     girl_child: 0,
     house_rent: 0
-    // is_submitted1: false
+    // is_submitted1: false,
     // is_submitted2: false
   };
 

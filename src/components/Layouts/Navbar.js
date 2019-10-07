@@ -17,7 +17,7 @@ export default class Navbar extends Component {
               {/* My LinkedIn Profile */}
             </a>{" "}
             <a href="https://github.com/mdjunaid14/" className="link-changes">
-              <i class="fab fa-github"></i>
+              <i className="fab fa-github"></i>
               {/* My Github Profile */}
             </a>
           </div>
