@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { calc } from "../math/calculation";
-import PieCharts from "./Layouts/PieCharts";
+import { calc, calculator } from "../../math/calculation";
+import PieCharts from "../Piecharts/PieCharts";
 
 class Result extends Component {
   state = {
@@ -26,12 +26,15 @@ class Result extends Component {
       home_interest,
       home_premium
     } = this.props.values.values;
+
+    // Set values to state
     this.setState({ values: this.props.values.values });
 
     // console.log(age, basic_salary, health_ins, nps);
     const [
       sal_calc,
       amount_calc,
+      sal_aftertax,
       fixed_deposit_calc,
       ssy_calc,
       nps_calc,
@@ -53,7 +56,10 @@ class Result extends Component {
       home_interest,
       home_premium
     );
-    console.log(sal_calc, amount_calc);
+
+    const amt_normal = calculator(basic_salary, (amt = 0), 0);
+    var sal_normal = basic_salary - amt_normal;
+    console.log(sal_calc, amount_calc, sal_aftertax);
     this.setState({
       amt: amount_calc,
       status: true,
@@ -61,7 +67,10 @@ class Result extends Component {
       ssy_calc: ssy_calc,
       nps_calc: nps_calc,
       deductions_calc: deductions_calc,
-      std_calc: std_calc
+      std_calc: std_calc,
+      sal_aftertax: sal_aftertax,
+      amt_normal: amt_normal,
+      sal_normal: sal_normal
     });
   };
 
@@ -79,7 +88,7 @@ class Result extends Component {
               className="btn btn-outline-warning"
               onClick={this.calculate}
             >
-              Show Results
+              Show Report
             </button>
           </div>
         )}
@@ -118,7 +127,9 @@ class Result extends Component {
                   Total Deductions under 80C (Home Loan Premium, Life Insurance,
                   EPF, PPF, Tuition Fee, NPS, NSC, Senior Citizen Savings
                   Scheme, Sukanya Samriddhi Yojana, Fixed Deposits, ELSS) is{" "}
-                  {this.state.deductions_calc}
+                  {this.state.deductions_calc +
+                    this.state.ssy_calc +
+                    this.state.fixed_deposit_calc}
                   <ul>
                     <li>Home Loan Premium: {this.state.values.home_premium}</li>
                     <li>Life Insurance: {this.state.values.life_ins}</li>

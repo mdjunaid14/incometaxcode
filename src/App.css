@@ -13,3 +13,13 @@
   padding: 50px;
   margin: 10px 0px;
 }
+
+.listStyle {
+  padding: 5px;
+  margin: 5px;
+}
+
+.box {
+  padding: 5px;
+  border: 0.25px black solid;
+}

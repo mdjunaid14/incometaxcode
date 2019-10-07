@@ -27,17 +27,18 @@ export const calc = (
 
   // deductions check
   if (deductible > 0) {
-    if (girl_child > 0) {
+    if (girl_child !== 0) {
       ssy = deductible; //ssy assignment
       deductible = 0;
     } else {
       ssy = 0;
+      fixed_deposit = deductible; //fixed_deposit assignment
     }
   } else if (deductible < 0) {
     deductible = 0;
     deductions = 150000;
   } else {
-    fixed_deposit = deductible; //fixed_deposit assignment
+    deductible = 0;
   }
 
   // hra adjustment
@@ -72,11 +73,17 @@ export const calc = (
     std + nps + ssy + fixed_deposit + deductions + gen_deductions;
   console.log(std, nps, fixed_deposit, deductions, gen_deductions, deductible);
 
+  // calculating the tax
   amt = calculator(sal, amt, final_deductions);
+  // salary after deductions
   sal -= final_deductions;
   console.log(amt, final_deductions, sal);
+  // salary after tax
+  var sal1 = sal - amt;
   // return amt;
-  return [sal, amt, fixed_deposit, ssy, nps, deductions, std];
+
+  // return the values
+  return [sal, amt, sal1, fixed_deposit, ssy, nps, deductions, std];
 };
 
 // Calculator for general TaxForm
