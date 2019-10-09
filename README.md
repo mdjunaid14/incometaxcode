@@ -1,3 +1,7 @@
+# This is the code for my Comprehensive Income Tax Calculator application build using React and Redux. 
+The working application link is [here](https://ancient-plains-04385.herokuapp.com/).
+
+# General Instructions 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
